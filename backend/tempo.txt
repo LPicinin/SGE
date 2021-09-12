@@ -1,0 +1,2 @@
+npm install --save pg
+npm install --save sequelize
