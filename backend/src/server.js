@@ -1,8 +1,10 @@
 require('dotenv').config();
-const express = require('express');
-const {sincroniza_models} = require('./models');
+import express, { json } from 'express';
+import { sincroniza_models } from './models';
 const app = express();
-app.use(express.json());
+app.use(json());
+
+//https://www.luiztools.com.br/post/tutorial-de-crud-com-node-js-sequelize-e-mysql/
 
 //create tables
 async function create() {
@@ -13,9 +15,9 @@ async function create() {
 create()
 
 //Rotas
-const userRouter = require('./routes/user.routes');
-const eventRouter = require('./routes/event.routes');
-const participantesRouter = require('./routes/participante.routes');
+import userRouter from './routes/user.routes';
+import eventRouter from './routes/event.routes';
+import participantesRouter from './routes/participante.routes';
 app.use('/users', userRouter);
 app.use('/events', eventRouter);
 app.use('/participants', participantesRouter);

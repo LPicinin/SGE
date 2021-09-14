@@ -1,17 +1,47 @@
+import Evento from "../models/Evento";
 export default class EventController {
+    valid(req) {
+        let erros = []
+        let { nome, descricao, inicio, termino, status } = req.body;
+        return erros;
+    }
     createOneRequest = (req, res) => {
-        res.status(201).json({ message: "New resource created!" });
+        let erros = this.valid(req);
+        if (erros.length == 0) {
+            Evento.create(req.body);
+            res.status(201).json({ message: "Novo evento criado!" });
+        }
+        else
+            res.status(400).json({ erros });
     }
 
     readOneRequest = (req, res) => {
-        res.status(302).json({  message: "Resource found!" });
+        const {id} = req.query;
+        let event = Evento.findByPk(id);
+        if(event)
+            res.status(200).json({  evento: event });
+        else
+            res.status(404).json({ message: 'Evento não encontrado' });
     }
 
     updateOneRequest = (req, res) => {
-        res.status(301).json({ message: "Resource updated!" });
+        let erros = this.valid(req);
+        if (erros.length == 0) {
+            Evento.update(req.body);
+            res.status(301).json({ message: "Novo evento criado!" });
+        }
+        else
+            res.status(404).json({ message: 'Evento não encontrado' });
     }
 
     deleteOneRequest = (req, res) => {
-        res.status(202).json({ message: "Resource deleted!" });
+        let erros = this.valid(req);
+        if (erros.length == 0) {
+            let ev = new Evento(req.body);
+            ev.destroy()
+            res.status(301).json({ message: "Novo evento criado!" });
+        }
+        else
+            res.status(404).json({ message: 'Evento não encontrado' });
     }
 }
