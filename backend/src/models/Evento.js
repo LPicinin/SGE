@@ -21,7 +21,11 @@ const Evento = sequelize.define('events', {
     },
     termino: {
         type: Sequelize.DATE,
+    },
+    status:{
+        type: Sequelize.CHAR,
     }
+
 })
 export default Evento;
 

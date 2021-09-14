@@ -20,6 +20,7 @@ export default class UserController {
     }
 
     readOneRequest = (req, res) => {
+        
         res.status(302).json({ message: "Resource found!" });
     }
 

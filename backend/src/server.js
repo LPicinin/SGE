@@ -15,8 +15,10 @@ create()
 //Rotas
 const userRouter = require('./routes/user.routes');
 const eventRouter = require('./routes/event.routes');
+const participantesRouter = require('./routes/participante.routes');
 app.use('/users', userRouter);
 app.use('/events', eventRouter);
+app.use('/participants', participantesRouter);
 
 app.get('/', (req, res) => {
     res.status(200).json({ message: "Hello from my-express-app!!" });
